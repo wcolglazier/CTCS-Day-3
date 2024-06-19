@@ -41,7 +41,7 @@ plot_predictions(test_data=x_test, test_labels=y_test, predictions=initial_preds
 
 # Define learning rate and number of epochs
 learning_rate = 0.0001
-epochs = 80000
+epochs = 80
 
 # Training loop
 for epoch in range(epochs):
