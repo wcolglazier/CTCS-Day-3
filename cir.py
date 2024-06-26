@@ -1,3 +1,4 @@
+#pip install numpy pandas matplotlib scikit-learn
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.datasets import make_circles
