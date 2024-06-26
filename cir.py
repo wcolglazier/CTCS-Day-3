@@ -62,10 +62,23 @@ class NeuralNetwork:
             dL_dz = dL_da * (dz_da > 0)
 
 
-# Define models
-model_0 = NeuralNetwork(input_size=2, hidden_layers=[5], output_size=1)
-model_1 = NeuralNetwork(input_size=2, hidden_layers=[10, 10], output_size=1)
-model_2 = NeuralNetwork(input_size=2, hidden_layers=[10, 10], output_size=1)
+# Define model
+model = NeuralNetwork(input_size=2, hidden_layers=[10, 10], output_size=1)
+
+# Print initial weights and biases
+print("Initial Weights and Biases:")
+for i, (weights, biases) in enumerate(zip(model.weights, model.biases)):
+    print(f"Layer {i+1} weights:\n{weights}")
+    print(f"Layer {i+1} biases:\n{biases}\n")
+
+# Print initial data
+print("Initial Training Data:")
+print(X_train[:5])
+print(y_train[:5])
+
+print("Initial Test Data:")
+print(X_test[:5])
+print(y_test[:5])
 
 
 # 3. Training Setup
@@ -76,7 +89,7 @@ def accuracy_fn(y_true, y_pred):
 
 
 # 4. Training Loop
-def train_model(model, X_train, y_train, X_test, y_test, epochs=5000, batch_size=32):
+def train_model(model, X_train, y_train, X_test, y_test, epochs=500, batch_size=32):
     train_losses = []
     test_losses = []
     for epoch in range(epochs):
@@ -109,10 +122,8 @@ def train_model(model, X_train, y_train, X_test, y_test, epochs=5000, batch_size
     return train_losses, test_losses
 
 
-# Train the models
-train_losses_0, test_losses_0 = train_model(model_0, X_train, y_train, X_test, y_test)
-train_losses_1, test_losses_1 = train_model(model_1, X_train, y_train, X_test, y_test)
-train_losses_2, test_losses_2 = train_model(model_2, X_train, y_train, X_test, y_test)
+# Train the model
+train_model(model, X_train, y_train, X_test, y_test)
 
 
 # 5. Define plot_decision_boundary function
@@ -134,17 +145,8 @@ def plot_decision_boundary(model, X, y):
 plt.figure(figsize=(12, 6))
 
 # Plot decision boundary for training set
-plt.subplot(1, 2, 1)
 plt.title("Train")
-plot_decision_boundary(model_2, X_train, y_train)
-
-# Plot loss curves
-plt.subplot(1, 2, 2)
-plt.plot(train_losses_2, label='Train Loss')
-plt.plot(test_losses_2, label='Test Loss')
-plt.xlabel("Epochs")
-plt.ylabel("Loss")
-plt.title("Loss Curves")
-plt.legend()
+plot_decision_boundary(model, X_train, y_train)
 
 plt.show()
+
