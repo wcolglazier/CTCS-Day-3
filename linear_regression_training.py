@@ -1,3 +1,4 @@
+#pip install torch matplotlib numpy==1.26.4
 import numpy as np
 import matplotlib.pyplot as plt
 
